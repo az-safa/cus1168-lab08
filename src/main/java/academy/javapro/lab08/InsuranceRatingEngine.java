@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 public class InsuranceRatingEngine {
 
     // Knowledge base (facts about insurance rates)
-	// TODO: Create a instance variable named knowledgeBase of type Map<String, Object> and initialize it with a new HashMap
+    // TODO: Create a instance variable named knowledgeBase of type Map<String, Object> and initialize it with a new HashMap
     private Map<String, Object> knowledgeBase = new HashMap<>();
 
     // Rules list
@@ -57,7 +57,7 @@ public class InsuranceRatingEngine {
     }
 
     private void initializeRules() {
-    	// Base rate rule - determines the starting premium based on vehicle type
+        // Base rate rule - determines the starting premium based on vehicle type
         // TODO: Call the rules.add method with a new Rule object where the first argument is "base rate"
         // TODO: Create a new Predicate object profile that always returns true
         // TODO: Create a new BiConsumer object with profile and premium as arguments
@@ -85,7 +85,6 @@ public class InsuranceRatingEngine {
             if (age < 20) {
                 factor = (double) knowledgeBase.get("ageFactor.16-19");
                 explanation = "Drivers under 20 have higher statistical risk";
-            
             // TODO: If age is less than 25 then assign the value of the knowledgeBase map with the key "ageFactor.20-24" to the factor variable and assign the value "Drivers 20-24 have moderately higher risk" to the explanation variable
             // TODO: If age is less than 66 then assign the value of the knowledgeBase map with the key "ageFactor.25-65" to the factor variable and assign the value "Standard rate for drivers 25-65" to the explanation variable
             } else if (age < 25) {
@@ -94,19 +93,19 @@ public class InsuranceRatingEngine {
             } else if (age < 66) {
                 factor = (double) knowledgeBase.get("ageFactor.25-65");
                 explanation = "Standard rate for drivers 25-65";
-            
             // TODO: Otherwise, assign the value of the knowledgeBase map with the key "ageFactor.66+" to the factor variable and assign the value "Slight increase for senior drivers" to the explanation variable
             } else {
                 factor = (double) knowledgeBase.get("ageFactor.66+");
                 explanation = "Slight increase for senior drivers";
             }
+
             // TODO: Create a new double variable adjustment and assign the result of the getBaseRate method on the premium object multiplied by (factor - 1.0)
             // TODO: Call the addAdjustment method on the premium object with "Age factor", adjustment, and explanation as arguments
             double adjustment = premium.getBaseRate() * (factor - 1.0);
             premium.addAdjustment("Age factor", adjustment, explanation);
         }));
 
-     // Accident history rule - adds surcharges for recent accidents
+        // Accident history rule - adds surcharges for recent accidents
         // TODO: Call the rules.add method with a new Rule object where the first argument is "accident history"
         // TODO: Create a new Predicate object profile that checks if the number of accidents in the last five years is greater than 0
         // TODO: Create a new BiConsumer object with profile and premium as arguments
@@ -129,6 +128,7 @@ public class InsuranceRatingEngine {
                 surcharge = (double) knowledgeBase.get("accidentSurcharge.2+");
                 explanation = "Major surcharge for 2+ accidents in past 5 years";
             }
+
             // TODO: Call the addAdjustment method on the premium object with "Accident history", surcharge, and explanation as arguments
             premium.addAdjustment("Accident history", surcharge, explanation);
         }));
@@ -136,10 +136,9 @@ public class InsuranceRatingEngine {
 
     // Helper method to determine vehicle category
     private String determineVehicleCategory(DriverProfile profile) {
-
         // TODO: Create a new String variable make and assign the result of the getVehicleMake method on the profile object
         // TODO: Create a new String variable model and assign the result of the getVehicleModel method on the profile object
-    	String make = profile.getVehicleMake();
+        String make = profile.getVehicleMake();
         String model = profile.getVehicleModel();
 
         // Simple classification logic
@@ -163,10 +162,10 @@ public class InsuranceRatingEngine {
 
     // Calculate premium by applying all applicable rules
     public Premium calculatePremium(DriverProfile profile) {
-    	// TODO: Create a new Premium object named premium
-    	Premium premium = new Premium();
+        // TODO: Create a new Premium object named premium
+        Premium premium = new Premium();
 
-    	// Apply all rules that match the profile
+        // Apply all rules that match the profile
         // TODO: For each rule, if the rule matches the profile, apply the rule to the profile and premium
         for (Rule rule : rules) {
             if (rule.matches(profile)) {
