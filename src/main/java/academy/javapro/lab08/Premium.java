@@ -1,4 +1,4 @@
-package academy.javapro.lab08;
+package lab08;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,4 +74,3 @@ public class Premium {
         this.explanations = explanations;
     }
 }
-

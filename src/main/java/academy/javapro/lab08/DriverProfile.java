@@ -1,4 +1,4 @@
-package academy.javapro.lab08;
+package lab08;
 
 public class DriverProfile {
     // Driver demographics
